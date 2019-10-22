@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  http:
+    image: abiosoft/caddy:php
+    volumes:
+      - .:/srv/app
+      - ./docker/caddy/Caddyfile:/etc/Caddyfile
+    ports:
+      - "80:2015"
+    links:
+      - database
+
+  database:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: database
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+
+
+volumes:
+  db-data:
+    driver: local
