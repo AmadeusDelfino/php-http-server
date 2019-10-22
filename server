@@ -1,0 +1,20 @@
+#!/usr/bin/env php
+<?php
+
+use ADelf\PHPServer\Request;
+use ADelf\PHPServer\Response;
+use ADelf\PHPServer\Server;
+
+require 'vendor/autoload.php';
+
+
+array_shift($argv);
+$port = 80;
+if(!empty($argv)) {
+    $port = array_shift($argv);
+}
+
+$server = new Server('127.0.0.1', $port);
+$server->listen(function (Request $request) {
+    return new Response('Hellooooo!');
+});
